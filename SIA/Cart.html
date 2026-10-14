@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your cart · Step 'N Kicks</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<script src="cart.js"></script>
+<style>
+:root{--bg:#121212;--card:#232326;--navy:#05051a;--navy2:#14143d;--blue:#1565c0;--blue2:#0a4fe0;--link:#6ea8ff;--muted:#a8a8b3;--text:#fff;--bd:#33333a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Lato","Helvetica Neue",Arial,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{font-family:inherit;cursor:pointer}
+.hide{display:none!important}
+.promo{background:var(--navy);text-align:center;font-size:11px;color:var(--muted);padding:7px}
+.promo b{color:#fff}
+header{display:flex;justify-content:flex-start;font-size:13px;align-items:center;gap:24px;padding:14px 28px;border-bottom:1px solid #222;position:sticky;top:0;background:var(--bg);z-index:5}
+.brand{font:900 16px "Arial Black",Arial,sans-serif;line-height:1;color:#fff}
+.brand small{display:block;font:700 5px Arial;letter-spacing:2px;margin-top:3px}
+nav{display:flex;gap:20px;font-size:12px}
+nav a{color:var(--muted)}
+nav a:hover{color:#fff}
+.icons{display:flex;gap:14px;font-size:16px;margin-left:auto}
+.icons a.on{filter:drop-shadow(0 0 4px var(--blue2))}
+.wrap{max-width:1180px;width:100%;margin:0 auto;padding:18px 28px 40px;flex:1}
+.crumb{font-size:10px;color:var(--muted)}
+.crumb a:hover{color:var(--text)}
+h1{font-size:30px;margin:10px 0 4px;letter-spacing:-.5px}
+.lead{color:var(--muted);margin:0 0 22px;font-size:12px}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:16px}
+.box h2{font-size:14px;margin:0 0 4px}
+.box .hd{display:flex;justify-content:space-between;align-items:center}
+.muted{color:var(--muted);font-size:10px}
+.link{color:var(--link);font-size:11px;background:none;border:0;padding:0}
+/* lines */
+.line{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--bd)}
+.line:first-child{border-top:0;padding-top:4px}
+.line .th{width:96px;height:96px;border-radius:8px;background:#fff;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.line .th img{width:100%;height:100%;object-fit:contain;padding:6px;mix-blend-mode:multiply}
+.line .th svg{width:92%;height:auto}
+.mid{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.brandn{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.mid b{font-size:14px}
+.ctl{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.ctl label{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.ctl select{background:var(--bg);color:var(--text);border:1px solid var(--bd);border-radius:6px;padding:6px 8px;font:inherit;font-size:11px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.qty button{width:28px;height:28px;background:none;border:0;color:var(--text);font-size:14px}
+.qty button:hover{background:var(--bg)}
+.qty span{min-width:26px;text-align:center;font-size:12px}
+.rm{background:none;border:0;color:#ff8a8a;font-size:11px;padding:0}
+.pr{font-size:16px;font-weight:700;text-align:right;white-space:nowrap}
+.pr .muted{font-weight:400;margin-top:3px}
+/* summary */
+.tr{display:flex;justify-content:space-between;margin:10px 0;font-size:12px;color:var(--muted)}
+.tr span:last-child{color:var(--text);font-family:"Courier New",monospace}
+.big{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd);margin-top:14px;padding-top:14px}
+.big span{font:20px "Courier New",monospace}
+.go{display:flex;align-items:center;justify-content:center;width:100%;height:42px;background:var(--blue);border-radius:6px;color:#fff;font-weight:700;font-size:12px;margin-top:14px}
+.go:hover{background:#1976d2}
+.go.off{opacity:.45;pointer-events:none}
+.keep{display:block;text-align:center;color:var(--link);font-size:11px;margin-top:12px}
+.empty{text-align:center;padding:50px 20px}
+.empty .big0{margin-bottom:12px}.empty .big0 .ico{width:56px;height:56px;margin:0 auto}
+.empty h2{font-size:18px;margin:0 0 6px}
+.empty p{color:var(--muted);margin:0 0 18px;font-size:12px}
+.empty .go{display:inline-flex;width:auto;padding:0 28px;margin:0}
+footer{padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:10px;color:var(--muted);background:var(--navy)}
+footer div{display:flex;gap:20px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav{display:none}}
+@media(max-width:560px){header{padding:12px 16px}.wrap{padding:16px}.line{flex-wrap:wrap}.line .th{width:80px;height:80px}.pr{width:100%;text-align:left}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="lo" viewBox="0 0 200 100"><path d="M12 74 Q12 86 26 86 L172 86 Q192 86 192 72 L192 68 L12 68Z" fill="var(--s,#fff)" stroke="#0003"/><path d="M14 70 L16 42 Q17 34 27 33 L48 31 Q60 22 72 14 L88 22 Q106 30 122 36 Q154 40 174 54 Q192 60 192 70Z" fill="currentColor" stroke="#0003"/><path d="M146 46 Q184 54 192 70 L146 70Z" fill="#0000001a"/><path d="M66 36 Q88 52 102 70 L115 70 Q100 48 80 34Z M90 36 Q108 50 118 70 L128 70 Q118 46 100 33Z" fill="var(--a)"/><path d="M15 52 Q32 50 42 62 L15 70Z" fill="var(--a)"/><path d="M76 20 l9 5 M86 25 l9 5 M96 30 l9 5" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="hi" viewBox="0 0 200 100"><path d="M12 74 Q12 86 26 86 L172 86 Q192 86 192 72 L192 70 L12 70Z" fill="var(--s,#fff)" stroke="#0003"/><path d="M16 72 L20 14 Q22 8 30 8 L66 8 L72 30 Q100 40 126 46 Q172 50 190 62 Q194 70 190 72Z" fill="currentColor" stroke="#0003"/><path d="M150 50 Q184 54 192 66 Q192 74 184 74 L150 74Z" fill="var(--a)"/><circle cx="38" cy="46" r="7" fill="var(--a)" opacity=".9"/><path d="M62 14 l12 5 M64 24 l12 5 M72 34 l12 5 M86 41 l12 5" stroke="var(--a)" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="bb" viewBox="0 0 200 100"><path d="M10 72 Q10 90 28 90 L170 90 Q194 90 194 74 L194 66 L10 66Z" fill="var(--s,#fff)" stroke="#0003"/><path d="M14 68 L18 24 Q20 12 34 12 L66 14 L74 32 Q110 40 134 46 Q176 50 192 62 L194 68Z" fill="currentColor" stroke="#0003"/><path d="M18 50 Q60 44 80 60 L84 68 L16 68Z" fill="var(--a)" opacity=".9"/><path d="M84 34 Q110 50 126 68 L140 68 Q124 46 98 32Z" fill="var(--a)"/><path d="M64 18 l12 5 M68 27 l12 5 M78 35 l12 5" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M10 78 H194" stroke="var(--a)" stroke-width="3"/></symbol>
+<symbol id="run" viewBox="0 0 200 100"><path d="M10 70 Q10 90 30 90 L170 90 Q194 90 194 76 L194 70 Q150 78 10 70Z" fill="var(--s,#fff)" stroke="#0003"/><path d="M14 72 L18 38 Q20 28 32 28 L52 26 Q62 20 74 18 L90 26 Q118 36 140 44 Q184 52 194 70 Q150 80 14 72Z" fill="currentColor" stroke="#0003"/><path d="M30 56 Q70 40 112 62 L108 70 Q70 58 30 66Z" fill="var(--a)"/><path d="M126 48 Q168 54 190 68 L150 70Z" fill="#ffffff30"/><path d="M72 24 l8 4 M82 29 l8 4 M92 33 l8 4" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M10 80 Q100 86 194 78" stroke="var(--a)" stroke-width="3" fill="none"/></symbol>
+<symbol id="clog" viewBox="0 0 200 100"><path d="M12 76 Q12 90 28 90 L170 90 Q192 90 192 76 L192 72 L12 72Z" fill="var(--s,#c9a56b)" stroke="#0003"/><path d="M14 74 Q14 36 40 32 Q74 30 100 40 Q150 44 182 60 Q194 66 192 74Z" fill="currentColor" stroke="#0003"/><path d="M92 36 Q108 20 130 30 L126 50Z" fill="var(--a)"/><rect x="104" y="30" width="14" height="12" rx="2" fill="none" stroke="#ddd" stroke-width="2"/><path d="M16 74 Q60 62 130 66" stroke="#0003" stroke-width="2" fill="none"/></symbol>
+<symbol id="slide" viewBox="0 0 200 100"><path d="M14 76 Q14 92 30 92 L172 92 Q192 92 192 76 L192 70 L14 70Z" fill="var(--s,#c9a56b)" stroke="#0003"/><path d="M14 72 Q14 62 30 62 L170 62 Q192 62 192 72 L192 74 L14 74Z" fill="var(--a)"/><path d="M50 62 Q50 36 82 34 Q116 34 124 62Z" fill="currentColor" stroke="#0003"/><path d="M118 62 Q124 44 150 46 Q176 50 184 64Z" fill="currentColor" stroke="#0003"/><rect x="94" y="40" width="12" height="10" rx="2" fill="#d9d9d9" stroke="#888"/><rect x="146" y="48" width="10" height="9" rx="2" fill="#d9d9d9" stroke="#888"/></symbol></svg>
+
+<div class="promo">Free shipping on orders over <b>₱5,000</b> &bull; Authenticity guaranteed on every pair</div>
+<header>
+  <a class="brand" href="shop.html">STEP 'N KICKS<small>SHOES • BUY • SELL</small></a>
+  <nav><a href="shop.html">Shop all</a><a href="#">New arrivals</a><a href="#">Brands</a><a href="#">Sale</a></nav>
+  <div class="icons"><a href="account.html" aria-label="My account"><img class="ico d" src="accountdarkmode.png" alt=""><img class="ico l" src="accountlightmode.png" alt=""></a><a href="orders.html" aria-label="My orders"><img class="ico d" src="orderdarkmode.png" alt=""><img class="ico l" src="orderlightmode.png" alt=""></a><a href="settings.html" aria-label="Settings"><img class="ico d" src="settingsdarkmode.png" alt=""><img class="ico l" src="settingslightmode.png" alt=""></a><a class="cartlnk on" href="cart.html" aria-label="Cart"><img class="ico d" src="cartdarkmode.png" alt=""><img class="ico l" src="cartlightmode.png" alt=""><span class="cn hide"></span></a></div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="shop.html">Home</a> › Cart</div>
+  <h1>Your cart</h1>
+  <p class="lead" id="lead"></p>
+
+  <div class="layout" id="full">
+    <section class="box" id="list"></section>
+    <aside>
+      <div class="box">
+        <div class="hd"><h2>Order summary</h2><button class="link" id="clearBtn" type="button">Clear cart</button></div>
+        <div class="tr" style="margin-top:14px"><span>Subtotal</span><span id="sSub"></span></div>
+        <div class="tr"><span>Standard shipping</span><span id="sShip"></span></div>
+        <div class="tr"><span>WELCOME500 discount</span><span id="sDisc"></span></div>
+        <div class="big"><b>Total</b><span id="sTotal"></span></div>
+        <div class="muted" style="margin-top:6px;font-size:9px">All prices in Philippine pesos. VAT included.</div>
+        <a class="go" id="checkout" href="shop.html?checkout=cart">Checkout</a>
+        <a class="keep" href="shop.html">← Continue shopping</a>
+      </div>
+    </aside>
+  </div>
+
+  <div class="box empty hide" id="empty">
+    <div class="big0"><img class="ico d" src="cartdarkmode.png" alt=""><img class="ico l" src="cartlightmode.png" alt=""></div>
+    <h2>Your cart is empty</h2>
+    <p>Looks like you haven't added any pairs yet.</p>
+    <a class="go" href="shop.html">Start shopping</a>
+  </div>
+</div>
+
+<footer><span>© 2026 Step 'N Kicks. All rights reserved.</span><div><a href="#">About us</a><a href="#">Contact us</a><a href="#">Shipping &amp; returns</a><a href="#">Size guide</a></div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const money=n=>"₱"+n.toLocaleString("en-PH",{minimumFractionDigits:2,maximumFractionDigits:2});
+const SIZES=[6,7,8,9,10,11,12,13],SHIP=150,DISC=500;
+const pl=x=>"product.html?n="+encodeURIComponent(x.n);
+const pic=x=>x.img?`<img src="${x.img}" alt="${x.n}">`:`<svg viewBox="0 0 200 100" style="color:${x.col};--a:${x.a};--s:${x.s}"><use href="#${x.d}"/></svg>`;
+
+function render(){
+  const items=SNKCart.get(),n=SNKCart.count();
+  $("full").classList.toggle("hide",!n);
+  $("empty").classList.toggle("hide",!!n);
+  $("lead").textContent=n?`${n} ${n>1?"items":"item"} in your cart.`:"";
+  if(!n)return;
+  $("list").innerHTML=items.map((x,i)=>`<div class="line" data-i="${i}">
+    <a class="th" href="${pl(x)}">${pic(x)}</a>
+    <div class="mid"><span class="brandn">${x.b}</span><a href="${pl(x)}"><b>${x.n}</b></a><span class="muted">${x.m.split("•").pop().trim()}</span>
+      <div class="ctl">
+        <label>Size (US) <select data-a="size">${SIZES.map(s=>`<option ${s===x.size?"selected":""}>${s}</option>`).join("")}</select></label>
+        <div class="qty"><button type="button" data-a="dec" aria-label="Decrease">−</button><span>${x.qty}</span><button type="button" data-a="inc" aria-label="Increase">+</button></div>
+        <button class="rm" type="button" data-a="rm">Remove</button>
+      </div></div>
+    <div class="pr">${money(x.p*x.qty)}<div class="muted">${money(x.p)} each</div></div></div>`).join("");
+  const sub=items.reduce((s,x)=>s+x.p*x.qty,0);
+  $("sSub").textContent=money(sub);$("sShip").textContent=money(SHIP);$("sDisc").textContent="-"+money(DISC);
+  $("sTotal").textContent=money(Math.max(0,sub+SHIP-DISC));
+}
+
+$("list").addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]"),line=e.target.closest(".line");
+  if(!b||!line||b.tagName==="SELECT")return;
+  const i=+line.dataset.i,q=SNKCart.get()[i].qty;
+  if(b.dataset.a==="inc")SNKCart.setQty(i,q+1);
+  if(b.dataset.a==="dec")SNKCart.setQty(i,q-1);
+  if(b.dataset.a==="rm")SNKCart.remove(i);
+  render();
+});
+$("list").addEventListener("change",e=>{
+  if(e.target.dataset.a!=="size")return;
+  SNKCart.setSize(+e.target.closest(".line").dataset.i,e.target.value);
+});
+$("clearBtn").addEventListener("click",()=>{SNKCart.clear();render()});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log in · Step 'N Kicks</title>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+:root{--bg:#121212;--card:#232326;--navy:#05051a;--navy2:#14143d;--blue:#1565c0;--blue2:#0a4fe0;--link:#6ea8ff;--muted:#a8a8b3;--text:#fff;--field:#fff;--bd:#9fe3ee;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Lato","Helvetica Neue",Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--link);text-decoration:none;cursor:pointer}
+.hide{display:none!important}
+button{font-family:inherit;cursor:pointer}
+header,footer{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;font-size:11px;color:var(--muted)}
+header{border-bottom:1px solid #222}
+.brand{font-family:"Arial Black",Arial,sans-serif;font-weight:900;font-size:15px;color:#fff;line-height:1}
+.brand small{display:block;font:700 5px Arial;letter-spacing:2px;margin-top:3px}
+footer div{display:flex;gap:22px}
+body.simple header,body.simple footer{display:none}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+label{display:block;font-size:10px;color:var(--muted);margin:12px 0 4px}
+input[type=text],input[type=email],input[type=password],input[type=tel],input[type=date]{width:100%;height:34px;padding:0 12px;border:1.5px solid transparent;background:var(--field);color:#111;font-size:12px;border-radius:4px;outline:none;font-family:inherit}
+input:focus{border-color:var(--bd);box-shadow:0 0 0 2px rgba(159,227,238,.35)}
+.btn{border:1.5px solid var(--navy2);background:var(--navy);color:#fff;border-radius:999px;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{border-color:var(--blue2)}
+.primary{width:100%;height:38px;background:var(--blue);border:0;border-radius:4px;color:#fff;font-weight:700;font-size:12px;margin-top:14px}
+.primary:hover{background:#1976d2}
+.err{color:#ff8a8a;font-size:11px;min-height:14px;margin-top:6px}
+#login{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;padding:24px 4px}
+#login .logo{width:230px;max-width:70%;margin-bottom:40px}
+img.logo{height:auto;object-fit:contain}
+#login h1{font-size:22px;margin:0 0 10px}
+#login form{width:100%}
+#login label{font:12px "Courier New",monospace;color:#fff}
+#login input{border-radius:0;border-color:var(--bd)}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.row a{color:#fff;font-size:11px;text-decoration:underline}
+.login-btn{width:80px;height:38px}
+.divider{display:flex;align-items:center;gap:10px;width:112%;margin:18px 0 20px;font-size:10px;color:#cfcfcf}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:#8a8a8a}
+.social{display:flex;flex-direction:column;gap:10px;align-items:center}
+.social .btn{width:164px;height:36px;border-color:#1b1b55}
+.card{width:100%;max-width:860px;display:grid;grid-template-columns:36% 1fr;background:var(--card);border:1px solid #333;border-radius:14px;overflow:hidden;min-height:430px}
+.side{background:var(--navy);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.side .logo{width:150px;margin:24px auto 0;display:block}
+.tag{font-size:6px;letter-spacing:1.5px;color:var(--muted)}
+.side h2{font-size:21px;line-height:1.2;margin:6px 0 10px}
+.side p{font-size:10px;color:var(--muted);line-height:1.5;margin:0}
+.perks{list-style:none;padding:0;margin:0;font-size:9px;display:grid;gap:10px}
+.perks li{display:flex;gap:8px;align-items:center}
+.perks svg{width:12px;height:12px;stroke:#cfd6ff;fill:none;stroke-width:1.6;flex:none}
+.form{padding:28px 30px}
+.form h1{font-size:18px;margin:0 0 4px}
+.sub{font-size:10px;color:var(--muted);margin:0 0 14px}
+.sec{font-size:10px;color:var(--link);font-weight:700;margin:14px 0 2px;padding-bottom:4px;border-bottom:1px solid #333}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pw{position:relative}
+.pw button{position:absolute;right:6px;top:4px;height:26px;width:28px;background:none;border:0;color:#555;font-size:13px}
+.check{display:flex;gap:8px;align-items:center;font-size:10px;color:var(--muted);margin-top:12px}
+.center{text-align:center;font-size:10px;color:var(--muted);margin-top:12px}
+.back{font-size:10px;display:inline-block;margin-bottom:18px}
+.icon{width:34px;height:34px;border-radius:8px;background:#1b2a4a;display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--link)}
+.note{font-size:9px;color:var(--muted);margin-top:10px}
+.help{margin-top:30px;font-size:10px}
+.help b{display:block;margin-bottom:4px}
+.help p{margin:0 0 4px;color:var(--muted)}
+.ok{background:#12301f;border:1px solid #1f6b3a;color:#9be3b5;padding:10px;border-radius:4px;font-size:11px;margin-top:12px}
+@media(max-width:720px){.card{grid-template-columns:1fr}.side{display:none}.two{grid-template-columns:1fr}.form{padding:24px 20px}}
+</style>
+</head>
+<body class="simple">
+
+<header><div class="brand">STEP 'N KICKS<small>SHOES • BUY • SELL</small></div><a href="#" data-go="login">← Back to log in</a></header>
+
+<main>
+<!-- LOGIN -->
+<section id="login">
+  <img class="logo" src="logo.png" alt="Step 'N Kicks">
+  <h1>Log in</h1>
+  <div class="ok hide" id="lok" style="text-align:center;width:100%">Account created! Please log in to continue.</div>
+  <form id="loginForm">
+    <label for="lemail">Email</label>
+    <input id="lemail" type="email" placeholder="you@example.com" autocomplete="email" required>
+    <label for="lpw">Password</label>
+    <input id="lpw" type="password" autocomplete="current-password" required>
+    <div class="row"><a href="#" data-go="forgot">Forgot password?</a><button class="btn login-btn" type="submit">Log In</button></div>
+    <div class="err" id="lerr" style="text-align:center"></div>
+  </form>
+  <div class="divider"><span>Doesn't have an account yet?</span></div>
+  <div class="social">
+    <button class="btn" type="button" data-go="signup">Create account</button>
+  </div>
+</section>
+
+<!-- CREATE ACCOUNT -->
+<section id="signup" class="card hide">
+  <aside class="side">
+    <div><img class="logo" src="logo.png" alt="Step 'N Kicks"></div>
+    <div><div class="tag">JOIN THE COMMUNITY</div><h2>Your next pair starts here.</h2><p>Discover your next favorite pair, save your wishlist, and buy or sell with confidence.</p></div>
+    <ul class="perks">
+      <li><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg>Keep your favorite pairs close</li>
+      <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Track every order in one place</li>
+      <li><svg viewBox="0 0 24 24"><path d="M4 8h16l-2 12H6zM9 8a3 3 0 0 1 6 0"/></svg>Buy and sell your way</li>
+    </ul>
+  </aside>
+  <div class="form">
+    <h1>Create account</h1><p class="sub">One account for all your kicks. Let's get you started.</p>
+    <form id="signupForm" novalidate>
+      <div class="sec">Personal information</div>
+      <div class="two"><div><label>First name</label><input type="text" id="fn" placeholder="Juan" required></div><div><label>Last name</label><input type="text" id="ln" placeholder="Dela Cruz" required></div></div>
+      <div class="two"><div><label>Phone number</label><input type="tel" placeholder="+63 917 123 4567"></div><div><label>Birthdate (optional)</label><input type="date"></div></div>
+      <div class="sec">Account information</div>
+      <label>Email address</label><input type="email" id="semail" placeholder="juan.delacruz@email.com" required>
+      <div class="two">
+        <div><label>Password</label><div class="pw"><input type="password" id="p1" placeholder="Create a password" required><button type="button" class="eye" aria-label="Show password">👁</button></div></div>
+        <div><label>Confirm password</label><div class="pw"><input type="password" id="p2" placeholder="Re-enter your password" required><button type="button" class="eye" aria-label="Show password">👁</button></div></div>
+      </div>
+      <p class="note">Use at least 8 characters, including uppercase and lowercase letters, a number, and a symbol.</p>
+      <label class="check"><input type="checkbox" id="terms"> I agree to the <a href="#">Terms of service</a> and <a href="#">Privacy policy</a>.</label>
+      <div class="err" id="serr"></div>
+      <button class="primary" type="submit">Create account</button>
+      <div class="center">Already have an account? <a href="#" data-go="login">Log in</a></div>
+    </form>
+  </div>
+</section>
+
+<!-- FORGOT PASSWORD -->
+<section id="forgot" class="card hide">
+  <aside class="side">
+    <div><img class="logo" src="logo.png" alt="Step 'N Kicks"></div>
+    <div><div class="tag">BACK IN YOUR STRIDE</div><h2>Your kicks. Your account.</h2><p>We'll help you get back to your saved pairs, orders, and the community you love.</p></div>
+    <ul class="perks">
+      <li><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Your account stays protected</li>
+      <li><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v5H4zM17 14h3v5h-3z"/></svg>Help when you need it</li>
+    </ul>
+  </aside>
+  <div class="form">
+    <a class="back" href="#" data-go="login">← Back to log in</a>
+    <div class="icon">🔑</div>
+    <h1>Forgot password?</h1><p class="sub">No worries. Enter the email address linked to your Step 'N Kicks account and we'll send you a password reset link.</p>
+    <form id="forgotForm">
+      <label>Email address</label><input type="email" id="femail" placeholder="juan.delacruz@email.com" required>
+      <button class="primary" type="submit">Send reset link</button>
+      <div class="ok hide" id="fok"></div>
+      <p class="note">For your security, we'll only send a link if an account exists with this email address.</p>
+    </form>
+    <div class="help"><b>Can't access your email?</b><p>Our team can help you recover access to your account.</p><a href="#">Contact support</a></div>
+  </div>
+</section>
+</main>
+
+<footer><span>© 2026 Step 'N Kicks. All rights reserved.</span><div><a href="#">Privacy policy</a><a href="#">Terms of service</a><a href="#">Help center</a></div></footer>
+
+<script>
+const SHOP_PAGE='shop.html';   // page opened after a successful log in
+const views=['login','signup','forgot'];
+function go(v){
+  views.forEach(id=>document.getElementById(id).classList.toggle('hide',id!==v));
+  document.body.classList.toggle('simple',v==='login');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();go(el.dataset.go)}));
+document.querySelectorAll('.eye').forEach(b=>b.addEventListener('click',()=>{
+  const i=b.previousElementSibling;i.type=i.type==='password'?'text':'password';
+}));
+
+// Log in -> opens the shop page
+document.getElementById('loginForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  // TODO: replace with your real auth call (Firebase, API, etc.)
+  document.getElementById('lerr').textContent='';
+  console.log('Login:',document.getElementById('lemail').value);
+  location.href=SHOP_PAGE;
+});
+
+// Create account
+document.getElementById('signupForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const err=document.getElementById('serr'),p1=document.getElementById('p1').value,p2=document.getElementById('p2').value;
+  const strong=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+  if(!document.getElementById('fn').value||!document.getElementById('ln').value||!document.getElementById('semail').value) return err.textContent='Please fill in your name and email.';
+  if(!strong.test(p1)) return err.textContent='Password needs 8+ characters with upper, lower, number and symbol.';
+  if(p1!==p2) return err.textContent="Passwords don't match.";
+  if(!document.getElementById('terms').checked) return err.textContent='Please agree to the Terms and Privacy policy.';
+  err.textContent='';
+  // TODO: send to your backend
+  console.log('Create account:',document.getElementById('semail').value);
+  document.getElementById('lemail').value=document.getElementById('semail').value;
+  document.getElementById('lpw').value='';
+  document.getElementById('lok').classList.remove('hide');
+  e.target.reset();
+  go('login');
+});
+
+// Forgot password
+document.getElementById('forgotForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const ok=document.getElementById('fok');
+  // TODO: call your password reset endpoint
+  ok.textContent='If an account exists for '+document.getElementById('femail').value+', a reset link is on its way.';
+  ok.classList.remove('hide');
+});
+</script>
+</body>
+</html>
