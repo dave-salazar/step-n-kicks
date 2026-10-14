@@ -8,6 +8,7 @@
 <script src="theme.js"></script>
 <script src="cart.js"></script>
 <script src="orders.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="products.js"></script>
 <link rel="icon" type="image/png" href="logo.png">
 <style>
@@ -273,6 +274,9 @@ input:focus{border-color:var(--bd);box-shadow:0 0 0 2px rgba(159,227,238,.35)}
 <div id="done" class="hide"><div><div style="font-size:34px">🎉</div><h2>Order placed!</h2><p id="doneMsg"></p><button class="primary" id="doneBtn" type="button">Continue shopping</button></div></div>
 
 <script>
+// Supabase: use your project's publishable key here. Never use a service_role/secret key in browser code.
+const SUPABASE_URL = "https://gkpevwehuvmtebhezvvc.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_QRCX-3fqe4n6dSBVK-hisA_RYwoA7fB";
 const views=['shop','pay'];
 function go(v){
   if(v==='login'){location.href='index.html';return}
@@ -298,8 +302,8 @@ function render(){
   let L=P.filter(x=>(st.cat==="All shoes"||x.c===st.cat)&&(st.g==="all"||x.g===st.g)&&(!st.br.size||st.br.has(x.b))
     &&x.p>=min&&x.p<=max&&(!st.stock||!x.out)&&(!st.q||(x.n+" "+x.b).toLowerCase().includes(st.q)));
   if(st.sort==="lo")L.sort((a,b)=>a.p-b.p);if(st.sort==="hi")L.sort((a,b)=>b.p-a.p);
-  $("count").textContent=`Showing 1–${L.length} of 134 pairs`;
-  $("shown").textContent=`${L.length} of 134 pairs displayed`;
+  $("count").textContent=`Showing 1–${L.length} of ${P.length} pairs`;
+  $("shown").textContent=`${L.length} of ${P.length} pairs displayed`;
   $("grid").innerHTML=L.length?L.map(x=>`<article class="p" data-i="${P.indexOf(x)}" tabindex="0" role="link" aria-label="View ${x.n}">
     <div class="img">${pic(x)}
       ${x.tag?`<span class="badge ${x.red?"red":""}">${x.tag}</span>`:""}
@@ -402,6 +406,58 @@ function toast(t){
   clearTimeout(toast.t);toast.t=setTimeout(()=>e.className="",1800);
 }
 render();
+
+// Load the shop catalog from Supabase. If the request fails, the existing local catalog stays available.
+async function loadSupabaseProducts(){
+  if (!window.supabase || SUPABASE_PUBLISHABLE_KEY === "YOUR_SUPABASE_PUBLISHABLE_KEY") {
+    console.warn("Supabase is not configured yet. Add your publishable key in shop.html.");
+    return;
+  }
+
+  try {
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    const { data, error } = await client
+      .from("products")
+      .select("id, name, price, image_url")
+      .order("id", { ascending: true });
+
+    if (error) throw error;
+    if (!Array.isArray(data)) throw new Error("Supabase did not return a product list.");
+
+    // Reuse local product details/images when a database name matches; the database controls name and price.
+    const localProducts = [...P];
+    const normalized = value => String(value || "").trim().toLowerCase();
+    const databaseProducts = data.map(row => {
+      const old = localProducts.find(item => normalized(item.n) === normalized(row.name));
+      return {
+        ...(old || {}),
+        id: row.id,
+        n: row.name,
+        p: Number(row.price),
+        b: old?.b || "Step 'N Kicks",
+        c: old?.c || "Lifestyle",
+        g: old?.g || "men",
+        m: old?.m || "Unisex • Available now",
+        r: old?.r ?? 4.8,
+        img: row.image_url || old?.img || "",
+        out: old?.out ?? false
+      };
+    }).filter(item => item.n && Number.isFinite(item.p));
+
+    // P is a const array shared by this page's existing cart/product code, so update its contents in place.
+    P.splice(0, P.length, ...databaseProducts);
+
+    const databaseBrands = [...new Set(P.map(item => item.b))];
+    $("brands").innerHTML = databaseBrands.map(b => `<label class="opt"><input type="checkbox" value="${b}"> ${b}</label>`).join("");
+    st.br.clear();
+    render();
+    console.info(`Loaded ${P.length} products from Supabase.`);
+  } catch (error) {
+    console.error("Could not load products from Supabase. Showing the existing local products instead.", error);
+  }
+}
+loadSupabaseProducts();
+
 // Checkout from the product page ("Buy now") or the cart page
 const qs=new URLSearchParams(location.search);
 if(qs.get("buy")!==null&&P[+qs.get("buy")]&&!P[+qs.get("buy")].out){
