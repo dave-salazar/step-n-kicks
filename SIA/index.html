@@ -169,13 +169,23 @@ document.querySelectorAll('.eye').forEach(b=>b.addEventListener('click',()=>{
   const i=b.previousElementSibling;i.type=i.type==='password'?'text':'password';
 }));
 
-// Log in -> opens the shop page
+// Log in -> admins go to the dashboard, everyone else to the shop
+const ADMIN_PAGE='admin-inventory.html';
+const ADMIN_EMAILS=['admin@stepnkicks.com'];   // change to your admin email(s)
+
 document.getElementById('loginForm').addEventListener('submit',e=>{
   e.preventDefault();
   // TODO: replace with your real auth call (Firebase, API, etc.)
   document.getElementById('lerr').textContent='';
-  console.log('Login:',document.getElementById('lemail').value);
-  location.href=SHOP_PAGE;
+  const email=document.getElementById('lemail').value.trim().toLowerCase();
+  console.log('Login:',email);
+  if(ADMIN_EMAILS.includes(email)){
+    try{localStorage.setItem('snk-role','admin')}catch(_){}
+    location.href=ADMIN_PAGE;
+  }else{
+    try{localStorage.removeItem('snk-role')}catch(_){}
+    location.href=SHOP_PAGE;
+  }
 });
 
 // Create account
