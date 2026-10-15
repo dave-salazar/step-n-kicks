@@ -171,15 +171,22 @@ document.querySelectorAll('.eye').forEach(b=>b.addEventListener('click',()=>{
 
 // Log in -> admins go to the dashboard, everyone else to the shop
 const ADMIN_PAGE='admin-inventory.html';
-const ADMIN_EMAILS=['admin@stepnkicks.com'];   // change to your admin email(s)
+const ADMIN_EMAIL='admin@stepnkicks.com';   // change to your admin email
+const ADMIN_PASSWORD='Admin@123';           // change to your admin password
 
 document.getElementById('loginForm').addEventListener('submit',e=>{
   e.preventDefault();
   // TODO: replace with your real auth call (Firebase, API, etc.)
-  document.getElementById('lerr').textContent='';
+  const err=document.getElementById('lerr');
   const email=document.getElementById('lemail').value.trim().toLowerCase();
-  console.log('Login:',email);
-  if(ADMIN_EMAILS.includes(email)){
+  const pw=document.getElementById('lpw').value;
+  err.textContent='';
+
+  if(email===ADMIN_EMAIL.toLowerCase()){
+    if(pw!==ADMIN_PASSWORD){
+      err.textContent='Incorrect email or password.';
+      return;
+    }
     try{localStorage.setItem('snk-role','admin')}catch(_){}
     location.href=ADMIN_PAGE;
   }else{
