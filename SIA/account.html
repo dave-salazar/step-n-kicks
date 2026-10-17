@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My account · Step 'N Kicks</title>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<script src="cart.js"></script>
+<script src="orders.js"></script>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+:root{--bg:#121212;--card:#232326;--navy:#05051a;--navy2:#14143d;--blue:#1565c0;--blue2:#0a4fe0;--link:#6ea8ff;--muted:#a8a8b3;--text:#fff;--field:#fff;--bd:#33333a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Lato","Helvetica Neue",Arial,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{font-family:inherit;cursor:pointer}
+.hide{display:none!important}
+.promo{background:var(--navy);text-align:center;font-size:11px;color:var(--muted);padding:7px}
+.promo b{color:#fff}
+header{display:flex;justify-content:flex-start;font-size:13px;align-items:center;gap:24px;padding:14px 28px;border-bottom:1px solid #222;position:sticky;top:0;background:var(--bg);z-index:5}
+.brand{font:900 16px "Arial Black",Arial,sans-serif;line-height:1;color:#fff}
+.brand small{display:block;font:700 5px Arial;letter-spacing:2px;margin-top:3px}
+nav{display:flex;gap:20px;font-size:12px}
+nav a{color:var(--muted)}
+nav a.on,nav a:hover{color:#fff}
+.icons{display:flex;gap:14px;font-size:16px;margin-left:auto}
+.icons a.on{filter:drop-shadow(0 0 4px var(--blue2))}
+.wrap{max-width:1180px;width:100%;margin:0 auto;padding:18px 28px 40px;flex:1}
+.crumb{font-size:10px;color:var(--muted)}
+.crumb a:hover{color:#fff}
+h1{font-size:30px;margin:10px 0 4px;letter-spacing:-.5px}
+.lead{color:var(--muted);margin:0 0 22px;font-size:12px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:28px}
+/* sidebar */
+.me{display:flex;gap:12px;align-items:center;padding-bottom:16px}
+.av{width:46px;height:46px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none}
+.me b{display:block;font-size:13px}
+.me span{font-size:10px;color:var(--muted)}
+.tabs{border-top:1px solid var(--bd);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.tab{background:none;border:0;color:var(--muted);text-align:left;padding:10px 12px;border-radius:6px;font-size:12px;display:flex;gap:10px;align-items:center}
+.tab:hover{color:#fff;background:var(--card)}
+.tab.on{background:var(--blue);color:#fff}
+.tab.out{margin-top:10px;border-top:1px solid var(--bd);border-radius:0 0 6px 6px;padding-top:14px}
+/* panels */
+.panel{display:none}
+.panel.on{display:block}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:16px}
+.box h2{font-size:14px;margin:0 0 4px}
+.box .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.box .hd a,.link{color:var(--link);font-size:11px;background:none;border:0;padding:0}
+.muted{color:var(--muted);font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.stat b{display:block;font-size:22px;margin-bottom:2px}
+.stat span{font-size:10px;color:var(--muted)}
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-top:14px}
+.rows label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}
+.rows div div{font-size:13px}
+.rows input{width:100%;height:36px;background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:#fff;padding:0 12px;font:inherit;outline:none}
+.rows input:focus{border-color:var(--blue2)}
+.btns{display:flex;gap:10px;margin-top:18px}
+.btn{height:36px;padding:0 18px;border-radius:6px;border:0;background:var(--blue);color:#fff;font-weight:700;font-size:11px}
+.btn:hover{background:#1976d2}
+.btn.ghost{background:none;border:1px solid var(--bd);color:#ddd}
+.ok{background:#12301f;border:1px solid #1f6b3a;color:#9be3b5;padding:10px;border-radius:4px;font-size:11px;margin-top:12px}
+/* orders */
+.ord{display:flex;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--bd)}
+.ord:first-of-type{border-top:0}
+.ord .th{width:56px;height:56px;border-radius:6px;background:#fff;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ord .th img{width:100%;height:100%;object-fit:contain;padding:4px;mix-blend-mode:multiply}
+.ord .mid{flex:1}
+.ord .mid b{display:block;font-size:13px;margin-bottom:3px}
+.ord .pr{font-weight:700;font-size:14px;text-align:right}
+.status{display:inline-block;font-size:9px;padding:3px 8px;border-radius:4px;background:var(--navy);margin-top:6px}
+.status.go{background:#12301f;color:#9be3b5}
+.status.way{background:#10223f;color:#9fc0f5}
+/* addresses */
+.addr{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--bd);font-size:12px;line-height:1.6}
+.addr:first-of-type{border-top:0}
+.addr .tag{font-size:9px;background:var(--blue);padding:2px 7px;border-radius:4px;margin-left:8px;vertical-align:middle}
+.addr .muted{font-size:11px}
+.empty{text-align:center;color:var(--muted);padding:30px 0}
+footer{padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:10px;color:var(--muted);background:var(--navy)}
+footer div{display:flex;gap:20px}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
+nav{display:none}
+.tabs{flex-direction:row;overflow-x:auto;border-top:0;padding-top:0}
+.tab{white-space:nowrap}
+.tab.out{margin-top:0;border-top:0;padding-top:10px}
+}
+@media(max-width:560px){
+header{padding:12px 16px}
+.wrap{padding:16px}
+.stats{grid-template-columns:1fr}
+.rows{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="promo">Free shipping on orders over <b>₱5,000</b> &bull; Authenticity guaranteed on every pair</div>
+<header>
+  <a class="brand" href="shop.html">STEP 'N KICKS<small>SHOES • BUY • SELL</small></a>
+  <nav><a href="shop.html">Shop all</a><a href="#">New arrivals</a><a href="#">Brands</a><a href="#">Sale</a></nav>
+  <div class="icons"><a class="on" href="account.html" aria-label="My account"><img class="ico d" src="accountdarkmode.png" alt=""><img class="ico l" src="accountlightmode.png" alt=""></a><a href="orders.html" aria-label="My orders"><img class="ico d" src="orderdarkmode.png" alt=""><img class="ico l" src="orderlightmode.png" alt=""></a><a href="settings.html" aria-label="Settings"><img class="ico d" src="settingsdarkmode.png" alt=""><img class="ico l" src="settingslightmode.png" alt=""></a><a class="cartlnk" href="cart.html" aria-label="Cart"><img class="ico d" src="cartdarkmode.png" alt=""><img class="ico l" src="cartlightmode.png" alt=""><span class="cn hide"></span></a></div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="shop.html">Home</a> › My account</div>
+  <h1>My account</h1>
+  <p class="lead">Manage your details, orders and delivery addresses.</p>
+
+  <div class="layout">
+    <aside>
+      <div class="me"><div class="av" id="av">JD</div><div><b id="meName">Juan Dela Cruz</b><span id="meMail">juan.delacruz@email.com</span></div></div>
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-t="profile"><img class="ico d" src="accountdarkmode.png" alt=""><img class="ico l" src="accountlightmode.png" alt=""> Profile</button>
+        <a class="tab" href="orders.html"><img class="ico d" src="orderdarkmode.png" alt=""><img class="ico l" src="orderlightmode.png" alt=""> Orders</a>
+        <button class="tab" data-t="addresses">📍 Addresses</button>
+        <a class="tab" href="settings.html"><img class="ico d" src="settingsdarkmode.png" alt=""><img class="ico l" src="settingslightmode.png" alt=""> Settings</a>
+        <a class="tab out" href="index.html">⎋ Log out</a>
+      </div>
+    </aside>
+
+    <section>
+      <!-- PROFILE -->
+      <div class="panel on" id="profile">
+        <div class="stats">
+          <div class="stat"><b id="stPlaced">0</b><span>Orders placed</span></div>
+          <div class="stat"><b id="stActive">0</b><span>Active deliveries</span></div>
+          <div class="stat"><b>₱500</b><span>Welcome voucher available</span></div>
+        </div>
+        <form class="box" id="pform">
+          <div class="hd"><h2>Personal information</h2><button type="button" class="link" id="editBtn">Edit</button></div>
+          <div class="muted">Your name and contact details.</div>
+          <div class="rows">
+            <div><label for="fn">First name</label><input id="fn" value="Juan" disabled></div>
+            <div><label for="ln">Last name</label><input id="ln" value="Dela Cruz" disabled></div>
+            <div><label for="em">Email address</label><input id="em" type="email" value="juan.delacruz@email.com" disabled></div>
+            <div><label for="ph">Phone number</label><input id="ph" type="tel" value="+63 917 123 4567" disabled></div>
+          </div>
+          <div class="btns hide" id="saveRow"><button class="btn" type="submit">Save changes</button><button class="btn ghost" type="button" id="cancelBtn">Cancel</button></div>
+          <div class="ok hide" id="saved">Your details have been updated.</div>
+        </form>
+        <div class="box">
+          <div class="hd"><h2>Password</h2><a href="#">Change password</a></div>
+          <div class="muted">Use a strong password you don't use anywhere else.</div>
+        </div>
+      </div>
+
+      <!-- ADDRESSES -->
+      <div class="panel" id="addresses">
+        <div class="box">
+          <div class="hd"><h2>Saved addresses</h2><a href="#" id="addAddr">+ Add new</a></div>
+          <div class="addr"><span>📍</span><div><b>Juan Dela Cruz</b><span class="tag">Default</span><div class="muted">Unit 4B, 123 Mabini Street, Barangay Poblacion Makati City, Metro Manila 1210, Philippines</div><div class="muted">+63 917 123 4567</div></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer><span>© 2026 Step 'N Kicks. All rights reserved.</span><div><a href="#">About us</a><a href="#">Contact us</a><a href="#">Shipping &amp; returns</a><a href="#">Size guide</a></div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+
+// Order stats
+(function(){const o=SNKOrders.get();$("stPlaced").textContent=o.length;$("stActive").textContent=o.filter(x=>SNKOrders.isActive(x)).length})();
+
+// Tabs
+$("tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button.tab");if(!b)return;
+  document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t===b));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===b.dataset.t));
+});
+
+// Edit profile
+const fields=["fn","ln","em","ph"];
+let backup={};
+function setEdit(on){
+  fields.forEach(id=>$(id).disabled=!on);
+  $("saveRow").classList.toggle("hide",!on);
+  $("editBtn").classList.toggle("hide",on);
+  if(on){backup={};fields.forEach(id=>backup[id]=$(id).value);$("saved").classList.add("hide");$("fn").focus()}
+}
+$("editBtn").addEventListener("click",()=>setEdit(true));
+$("cancelBtn").addEventListener("click",()=>{fields.forEach(id=>$(id).value=backup[id]);setEdit(false)});
+$("pform").addEventListener("submit",e=>{
+  e.preventDefault();
+  // TODO: send updated details to your backend
+  const f=$("fn").value.trim(),l=$("ln").value.trim();
+  $("meName").textContent=f+" "+l;
+  $("meMail").textContent=$("em").value;
+  $("av").textContent=((f[0]||"")+(l[0]||"")).toUpperCase();
+  setEdit(false);
+  $("saved").classList.remove("hide");
+});
+$("addAddr").addEventListener("click",e=>{e.preventDefault();alert("Connect your address editor here.")});
+</script>
+</body>
+</html>
