@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1565c0">
+<meta property="og:site_name" content="Step 'N Kicks">
+<meta property="og:type" content="website">
+<title>My account · Step 'N Kicks</title>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<script src="cart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="db.js"></script>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+:root{--bg:#121212;--card:#232326;--navy:#05051a;--navy2:#14143d;--blue:#1565c0;--blue2:#0a4fe0;--link:#6ea8ff;--muted:#a8a8b3;--text:#fff;--field:#fff;--bd:#33333a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Lato","Helvetica Neue",Arial,sans-serif;font-size:13px;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{font-family:inherit;cursor:pointer}
+.hide{display:none!important}
+.promo{background:var(--navy);text-align:center;font-size:11px;color:var(--muted);padding:7px}
+.promo b{color:#fff}
+header{display:flex;justify-content:flex-start;font-size:13px;align-items:center;gap:24px;padding:14px 28px;border-bottom:1px solid #222;position:sticky;top:0;background:var(--bg);z-index:5}
+.brand{font:900 16px "Arial Black",Arial,sans-serif;line-height:1;color:#fff}
+.brand small{display:block;font:700 5px Arial;letter-spacing:2px;margin-top:3px}
+nav{display:flex;gap:20px;font-size:12px}
+nav a{color:var(--muted)}
+nav a.on,nav a:hover{color:#fff}
+.icons{display:flex;gap:14px;font-size:16px;margin-left:auto}
+.icons a.on{filter:drop-shadow(0 0 4px var(--blue2))}
+.wrap{max-width:1180px;width:100%;margin:0 auto;padding:18px 28px 40px;flex:1}
+.crumb{font-size:10px;color:var(--muted)}
+.crumb a:hover{color:#fff}
+h1{font-size:30px;margin:10px 0 4px;letter-spacing:-.5px}
+.lead{color:var(--muted);margin:0 0 22px;font-size:12px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:28px}
+/* sidebar */
+.me{display:flex;gap:12px;align-items:center;padding-bottom:16px}
+.av{width:46px;height:46px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none}
+.me b{display:block;font-size:13px}
+.me span{font-size:10px;color:var(--muted)}
+.tabs{border-top:1px solid var(--bd);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.tab{background:none;border:0;color:var(--muted);text-align:left;padding:10px 12px;border-radius:6px;font-size:12px;display:flex;gap:10px;align-items:center}
+.tab:hover{color:#fff;background:var(--card)}
+.tab.on{background:var(--blue);color:#fff}
+.tab.out{margin-top:10px;border-top:1px solid var(--bd);border-radius:0 0 6px 6px;padding-top:14px}
+/* panels */
+.panel{display:none}
+.panel.on{display:block}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:16px}
+.box h2{font-size:14px;margin:0 0 4px}
+.box .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.box .hd a,.link{color:var(--link);font-size:11px;background:none;border:0;padding:0}
+.muted{color:var(--muted);font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.stat b{display:block;font-size:22px;margin-bottom:2px}
+.stat span{font-size:10px;color:var(--muted)}
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-top:14px}
+.rows label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}
+.rows div div{font-size:13px}
+.rows input{width:100%;height:36px;background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:#fff;padding:0 12px;font:inherit;outline:none}
+.rows input:focus{border-color:var(--blue2)}
+.btns{display:flex;gap:10px;margin-top:18px}
+.btn{height:36px;padding:0 18px;border-radius:6px;border:0;background:var(--blue);color:#fff;font-weight:700;font-size:11px}
+.btn:hover{background:#1976d2}
+.btn.ghost{background:none;border:1px solid var(--bd);color:#ddd}
+.ok{background:#12301f;border:1px solid #1f6b3a;color:#9be3b5;padding:10px;border-radius:4px;font-size:11px;margin-top:12px}
+/* orders */
+.ord{display:flex;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--bd)}
+.ord:first-of-type{border-top:0}
+.ord .th{width:56px;height:56px;border-radius:6px;background:#fff;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ord .th img{width:100%;height:100%;object-fit:contain;padding:4px;mix-blend-mode:multiply}
+.ord .mid{flex:1}
+.ord .mid b{display:block;font-size:13px;margin-bottom:3px}
+.ord .pr{font-weight:700;font-size:14px;text-align:right}
+.status{display:inline-block;font-size:9px;padding:3px 8px;border-radius:4px;background:var(--navy);margin-top:6px}
+.status.go{background:#12301f;color:#9be3b5}
+.status.way{background:#10223f;color:#9fc0f5}
+/* addresses */
+.addr{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--bd);font-size:12px;line-height:1.6}
+.addr:first-of-type{border-top:0}
+.addr .tag{font-size:9px;background:var(--blue);padding:2px 7px;border-radius:4px;margin-left:8px;vertical-align:middle}
+.addr .muted{font-size:11px}
+.empty{text-align:center;color:var(--muted);padding:30px 0}
+footer{padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:10px;color:var(--muted);background:var(--navy)}
+footer div{display:flex;gap:20px}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
+nav{display:none}
+.tabs{flex-direction:row;overflow-x:auto;border-top:0;padding-top:0}
+.tab{white-space:nowrap}
+.tab.out{margin-top:0;border-top:0;padding-top:10px}
+}
+@media(max-width:560px){
+header{padding:12px 16px}
+.wrap{padding:16px}
+.stats{grid-template-columns:1fr}
+.rows{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="promo">Free shipping on orders over <b>₱5,000</b> &bull; Authenticity guaranteed on every pair</div>
+<header>
+  <a class="brand" href="shop.html">STEP 'N KICKS<small>SHOES • BUY • SELL</small></a>
+  <nav><a href="shop.html">Shop all</a><a href="shop.html?cat=new">New arrivals</a><a href="shop.html#brands">Brands</a></nav>
+  <div class="icons"><a class="on" href="account.html" aria-label="My account"><img class="ico d" src="accountdarkmode.png" alt=""><img class="ico l" src="accountlightmode.png" alt=""></a><a href="orders.html" aria-label="My orders"><img class="ico d" src="orderdarkmode.png" alt=""><img class="ico l" src="orderlightmode.png" alt=""></a><a href="settings.html" aria-label="Settings"><img class="ico d" src="settingsdarkmode.png" alt=""><img class="ico l" src="settingslightmode.png" alt=""></a><a class="cartlnk" href="cart.html" aria-label="Cart"><img class="ico d" src="cartdarkmode.png" alt=""><img class="ico l" src="cartlightmode.png" alt=""><span class="cn hide"></span></a></div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="shop.html">Home</a> › My account</div>
+  <h1>My account</h1>
+  <p class="lead">Manage your details, orders and delivery addresses.</p>
+
+  <div class="layout">
+    <aside>
+      <div class="me"><div class="av" id="av">?</div><div><b id="meName">…</b><span id="meMail"></span></div></div>
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-t="profile"><img class="ico d" src="accountdarkmode.png" alt=""><img class="ico l" src="accountlightmode.png" alt=""> Profile</button>
+        <a class="tab" href="orders.html"><img class="ico d" src="orderdarkmode.png" alt=""><img class="ico l" src="orderlightmode.png" alt=""> Orders</a>
+        <button class="tab" data-t="addresses">📍 Addresses</button>
+        <a class="tab" href="settings.html"><img class="ico d" src="settingsdarkmode.png" alt=""><img class="ico l" src="settingslightmode.png" alt=""> Settings</a>
+        <a class="tab out" href="index.html">⎋ Log out</a>
+      </div>
+    </aside>
+
+    <section>
+      <!-- PROFILE -->
+      <div class="panel on" id="profile">
+        <div class="stats">
+          <div class="stat"><b id="stPlaced">0</b><span>Orders placed</span></div>
+          <div class="stat"><b id="stActive">0</b><span>Active deliveries</span></div>
+          <div class="stat"><b id="stVoucher">–</b><span id="stVoucherL">Welcome voucher</span></div>
+        </div>
+        <form class="box" id="pform">
+          <div class="hd"><h2>Personal information</h2><button type="button" class="link" id="editBtn">Edit</button></div>
+          <div class="muted">Your name and contact details.</div>
+          <div class="rows">
+            <div><label for="fn">First name</label><input id="fn" disabled></div>
+            <div><label for="ln">Last name</label><input id="ln" disabled></div>
+            <div><label for="em">Email address</label><input id="em" type="email" disabled></div>
+            <div><label for="ph">Phone number</label><input id="ph" type="tel" disabled></div>
+          </div>
+          <div class="btns hide" id="saveRow"><button class="btn" type="submit">Save changes</button><button class="btn ghost" type="button" id="cancelBtn">Cancel</button></div>
+          <div style="color:#c62828;font-size:12px;margin-top:8px" id="perr"></div>
+          <div class="ok hide" id="saved">Your details have been updated.</div>
+        </form>
+        <div class="box">
+          <div class="hd"><h2>Password</h2><button type="button" class="link" id="pwBtn">Change password</button></div>
+          <div class="muted">Use a strong password you don't use anywhere else.</div>
+          <form id="pwForm" class="hide" style="margin-top:12px">
+            <div class="rows">
+              <div><label for="pw1">New password</label><input id="pw1" type="password" autocomplete="new-password"></div>
+              <div><label for="pw2">Confirm new password</label><input id="pw2" type="password" autocomplete="new-password"></div>
+            </div>
+            <div class="btns"><button class="btn" type="submit">Update password</button><button class="btn ghost" type="button" id="pwCancel">Cancel</button></div>
+            <div style="color:#c62828;font-size:12px;margin-top:8px" id="pwErr"></div>
+          </form>
+          <div class="ok hide" id="pwOk">Password updated.</div>
+        </div>
+      </div>
+
+      <!-- ADDRESSES -->
+      <div class="panel" id="addresses">
+        <div class="box">
+          <div class="hd"><h2>Saved addresses</h2><a href="#" id="addAddr">+ Add new</a></div>
+          <div id="addrList"><div class="muted">Loading…</div></div>
+        </div>
+        <form class="box hide" id="addrForm">
+          <div class="hd"><h2 id="afTitle">New address</h2></div>
+          <div class="rows">
+            <div><label for="afLabel">Label (optional)</label><input id="afLabel" placeholder="Home, Office…" maxlength="30"></div>
+            <div><label for="afName">Full name</label><input id="afName" maxlength="80"></div>
+            <div><label for="afPhone">Mobile number</label><input id="afPhone" type="tel" maxlength="20"></div>
+            <div><label for="afLine">Street, building, barangay</label><input id="afLine" maxlength="200"></div>
+            <div><label for="afCity">City / municipality</label><input id="afCity" maxlength="80"></div>
+            <div><label for="afProv">Province / region</label><input id="afProv" maxlength="80"></div>
+            <div><label for="afZip">Postal code</label><input id="afZip" maxlength="10"></div>
+          </div>
+          <div class="btns"><button class="btn" type="submit">Save address</button><button class="btn ghost" type="button" id="afCancel">Cancel</button></div>
+          <div style="color:#c62828;font-size:12px;margin-top:8px" id="afErr"></div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer><span>© 2026 Step 'N Kicks. All rights reserved.</span><div><a href="about.html">About us</a><a href="contact.html">Contact us</a><a href="shipping-returns.html">Shipping &amp; returns</a><a href="size-guide.html">Size guide</a><a href="help.html">Help center</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></footer>
+
+<script>
+const $=id=>document.getElementById(id),esc=SNKEsc;
+const STRONG=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,PHONE=/^[0-9+()\s-]{7,20}$/;
+let user=null,addrs=[],editId=null,backup={};
+const fields=["fn","ln","ph"];
+
+function paintMe(){
+  const md=user.user_metadata||{},f=md.first_name||"",l=md.last_name||"";
+  $("fn").value=f;$("ln").value=l;$("ph").value=md.phone||"";$("em").value=user.email||"";
+  $("meName").textContent=(f+" "+l).trim()||(user.email||"").split("@")[0];$("meMail").textContent=user.email||"";
+  $("av").textContent=((f[0]||"")+(l[0]||"")).toUpperCase()||(user.email||"?")[0].toUpperCase();
+}
+async function init(){
+  user=await SNKDB.requireLogin();if(!user)return;
+  paintMe();
+  try{
+    const o=await SNKDB.myOrders();
+    $("stPlaced").textContent=o.length;
+    $("stActive").textContent=o.filter(x=>["pending","paid","shipped"].includes(x.status)).length;
+    const el=!o.some(x=>x.status!=="cancelled");
+    $("stVoucher").textContent=el?"₱500":"Used";$("stVoucherL").textContent=el?"Welcome voucher available":"Welcome voucher";
+  }catch(e){}
+  loadAddrs();
+}
+
+// Tabs
+$("tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button.tab");if(!b)return;
+  document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t===b));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===b.dataset.t));
+});
+
+// Edit profile (email changes need a confirmation email, so the email is read-only here)
+function setEdit(on){
+  fields.forEach(id=>$(id).disabled=!on);
+  $("saveRow").classList.toggle("hide",!on);$("editBtn").classList.toggle("hide",on);
+  if(on){backup={};fields.forEach(id=>backup[id]=$(id).value);$("saved").classList.add("hide");$("perr").textContent="";$("fn").focus()}
+}
+$("editBtn").addEventListener("click",()=>setEdit(true));
+$("cancelBtn").addEventListener("click",()=>{fields.forEach(id=>$(id).value=backup[id]);setEdit(false)});
+$("pform").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const f=$("fn").value.trim(),l=$("ln").value.trim(),p=$("ph").value.trim();
+  if(!f||!l){$("perr").textContent="Please enter your first and last name.";return}
+  if(p&&!PHONE.test(p)){$("perr").textContent="Enter a valid phone number.";return}
+  try{
+    const r=await SNKDB.updateProfile({first_name:f,last_name:l,phone:p});user=r.user||user;
+    paintMe();setEdit(false);$("saved").classList.remove("hide");
+  }catch(ex){$("perr").textContent="Couldn't save your details. Please try again."}
+});
+
+// Change password
+$("pwBtn").addEventListener("click",()=>{$("pwForm").classList.remove("hide");$("pwOk").classList.add("hide");$("pw1").focus()});
+$("pwCancel").addEventListener("click",()=>{$("pwForm").classList.add("hide");$("pwForm").reset();$("pwErr").textContent=""});
+$("pwForm").addEventListener("submit",async e=>{
+  e.preventDefault();const a=$("pw1").value,b=$("pw2").value;
+  if(!STRONG.test(a)){$("pwErr").textContent="Password needs 8+ characters with upper, lower, number and symbol.";return}
+  if(a!==b){$("pwErr").textContent="Passwords don't match.";return}
+  try{await SNKDB.setPassword(a);$("pwForm").classList.add("hide");$("pwForm").reset();$("pwErr").textContent="";$("pwOk").classList.remove("hide")}
+  catch(ex){$("pwErr").textContent=ex.message||"Couldn't update your password."}
+});
+
+// Addresses
+async function loadAddrs(){
+  try{addrs=await SNKDB.listAddresses()}catch(e){$("addrList").innerHTML='<div class="muted">Couldn\'t load your addresses.</div>';return}
+  $("addrList").innerHTML=addrs.length?addrs.map(a=>`<div class="addr" data-id="${esc(a.id)}"><span>📍</span><div>
+    <b>${esc(a.full_name)}</b>${a.is_default?'<span class="tag">Default</span>':""}${a.label?` <span class="muted">· ${esc(a.label)}</span>`:""}
+    <div class="muted">${esc([a.address_line,a.city,a.province,a.postal_code].filter(Boolean).join(", "))}</div>
+    <div class="muted">${esc(a.phone)}</div>
+    <div style="margin-top:6px"><button class="link" type="button" data-a="edit">Edit</button> ·
+      ${a.is_default?"":'<button class="link" type="button" data-a="def">Set as default</button> · '}<button class="link" type="button" data-a="del">Delete</button></div>
+  </div></div>`).join(""):'<div class="muted">No saved addresses yet.</div>';
+}
+function openForm(a){
+  editId=a?a.id:null;$("afTitle").textContent=a?"Edit address":"New address";
+  $("afLabel").value=a?a.label||"":"";$("afName").value=a?a.full_name:(((user.user_metadata||{}).first_name||"")+" "+((user.user_metadata||{}).last_name||"")).trim();
+  $("afPhone").value=a?a.phone:(user.user_metadata||{}).phone||"";$("afLine").value=a?a.address_line:"";
+  $("afCity").value=a?a.city:"";$("afProv").value=a?a.province:"";$("afZip").value=a?a.postal_code||"":"";
+  $("afErr").textContent="";$("addrForm").classList.remove("hide");$("afName").focus();
+}
+$("addAddr").addEventListener("click",e=>{e.preventDefault();openForm(null)});
+$("afCancel").addEventListener("click",()=>$("addrForm").classList.add("hide"));
+$("addrList").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-a]");if(!b)return;
+  const id=b.closest(".addr").dataset.id,a=addrs.find(x=>x.id===id);
+  try{
+    if(b.dataset.a==="edit")openForm(a);
+    if(b.dataset.a==="def"){await SNKDB.makeDefault(id);loadAddrs()}
+    if(b.dataset.a==="del"&&confirm("Delete this address?")){await SNKDB.deleteAddress(id);loadAddrs()}
+  }catch(ex){alert("Something went wrong. Please try again.")}
+});
+$("addrForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const a={id:editId,label:$("afLabel").value.trim(),full_name:$("afName").value.trim(),phone:$("afPhone").value.trim(),
+           address_line:$("afLine").value.trim(),city:$("afCity").value.trim(),province:$("afProv").value.trim(),postal_code:$("afZip").value.trim()};
+  if(!a.full_name||!a.phone||!a.address_line||!a.city||!a.province){$("afErr").textContent="Please fill in every field except label and postal code.";return}
+  if(!PHONE.test(a.phone)){$("afErr").textContent="Enter a valid mobile number.";return}
+  try{await SNKDB.saveAddress(a);$("addrForm").classList.add("hide");loadAddrs()}
+  catch(ex){$("afErr").textContent="Couldn't save the address. Please try again."}
+});
+init();
+</script>
+</body>
+</html>
