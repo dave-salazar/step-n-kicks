@@ -1,9 +1,0 @@
-User-agent: *
-Disallow: /admin-inventory.html
-Disallow: /account.html
-Disallow: /orders.html
-Disallow: /cart.html
-Disallow: /settings.html
-
-# Replace YOUR-DOMAIN, then submit this sitemap in Google Search Console
-Sitemap: https://YOUR-DOMAIN/sitemap.xml
