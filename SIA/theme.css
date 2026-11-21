@@ -1,0 +1,227 @@
+/* Light theme. Dark is the default defined in each page. This file only overrides. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f5f8;
+  --card: #fff;
+  --text: #111;
+  --muted: #5f6370;
+  --link: #1565c0;
+  --bd: #d9dbe3;
+  --pb: #d9dbe3;
+}
+
+html[data-theme="light"] #shop {
+  --bd: #d9dbe3;
+  color: var(--text);
+}
+
+html[data-theme="light"] #pay {
+  --pb: #d9dbe3;
+  color: var(--text);
+}
+
+/* shared */
+html[data-theme="light"] header,
+html[data-theme="light"] #shop header {
+  border-bottom-color: var(--bd);
+}
+
+html[data-theme="light"] .brand,
+html[data-theme="light"] #shop .brand {
+  color: #111;
+}
+
+html[data-theme="light"] nav a.on,
+html[data-theme="light"] nav a:hover,
+html[data-theme="light"] #shop nav a.on,
+html[data-theme="light"] #shop nav a:hover {
+  color: #111;
+}
+
+html[data-theme="light"] .promo,
+html[data-theme="light"] .wrap ~ footer,
+html[data-theme="light"] #shop footer,
+html[data-theme="light"] #shop .sperks span {
+  color: #a8a8b3;
+}
+
+/* Side panels stay dark for contrast */
+html[data-theme="light"] .sperks,
+html[data-theme="light"] .side {
+  color: #fff;
+}
+
+html[data-theme="light"] input:focus {
+  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.25);
+}
+
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="email"],
+html[data-theme="light"] input[type="password"],
+html[data-theme="light"] input[type="tel"],
+html[data-theme="light"] input[type="date"] {
+  border-color: var(--bd);
+  color: var(--text);
+  background: var(--card);
+}
+
+/* login */
+html[data-theme="light"] #login label,
+html[data-theme="light"] .row a {
+  color: #111;
+}
+
+html[data-theme="light"] .divider {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .card {
+  border-color: var(--bd);
+  background: var(--card);
+}
+
+html[data-theme="light"] .sec {
+  border-bottom-color: var(--bd);
+}
+
+html[data-theme="light"] .icon {
+  color: #1565c0;
+}
+
+/* shop */
+html[data-theme="light"] #shop .chip,
+html[data-theme="light"] #shop .sizes button,
+html[data-theme="light"] #shop .pg button {
+  color: #111;
+}
+
+html[data-theme="light"] #shop .chip.on,
+html[data-theme="light"] #shop .sizes button.on,
+html[data-theme="light"] #shop .pg button.on {
+  color: #fff;
+}
+
+html[data-theme="light"] #shop .search input,
+html[data-theme="light"] #shop .price input,
+html[data-theme="light"] #shop .bar select {
+  color: #111;
+  background: var(--card);
+  border-color: var(--bd);
+}
+
+/* payment */
+html[data-theme="light"] #pay footer {
+  border-top-color: var(--bd);
+}
+
+html[data-theme="light"] #pay .box,
+html[data-theme="light"] #done div {
+  background: var(--card);
+}
+
+html[data-theme="light"] #done div {
+  border-color: var(--bd);
+}
+
+html[data-theme="light"] #pay .m {
+  background: #f1f2f6;
+  color: #111;
+}
+
+html[data-theme="light"] #pay .m.on {
+  background: #e6efff;
+}
+
+html[data-theme="light"] #pay .alt,
+html[data-theme="light"] #pay .promo2 {
+  background: #e6efff;
+  border-color: #b9d0f5;
+  color: #1f4a8a;
+}
+
+html[data-theme="light"] #pay .promo2 b {
+  color: #1565c0;
+}
+
+html[data-theme="light"] #pay .tr {
+  color: #444;
+}
+
+html[data-theme="light"] #pay .tr span:last-child,
+html[data-theme="light"] #pay .confid b,
+html[data-theme="light"] #pay .steps .on {
+  color: #111;
+}
+
+html[data-theme="light"] #pay .steps .ln {
+  background: var(--bd);
+}
+
+/* account / settings / orders */
+html[data-theme="light"] .tab:hover {
+  color: #111;
+}
+
+html[data-theme="light"] .tab.on,
+html[data-theme="light"] .av,
+html[data-theme="light"] .status,
+html[data-theme="light"] .addr .tag {
+  color: #fff;
+}
+
+html[data-theme="light"] .status.go {
+  color: #1a7f4a;
+}
+
+html[data-theme="light"] .status.way {
+  color: #1565c0;
+}
+
+html[data-theme="light"] .rows input {
+  color: #111;
+  background: var(--card);
+  border-color: var(--bd);
+}
+
+html[data-theme="light"] .btn.ghost {
+  color: #333;
+}
+
+html[data-theme="light"] .sw span {
+  background: #c3c6d0;
+}
+
+/* Icons: each has a dark-mode (.d) and light-mode (.l) image */
+.ico {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+.ico.l {
+  display: none;
+}
+
+html[data-theme="light"] .ico.d {
+  display: none;
+}
+
+html[data-theme="light"] .ico.l {
+  display: block;
+}
+
+.icons {
+  align-items: center;
+}
+
+.tab .ico {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+/* Only invert icons on active tabs in dark mode */
+html:not([data-theme="light"]) .tab.on .ico {
+  filter: brightness(0) invert(1);
+}
